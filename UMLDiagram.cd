@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Word.Principal">
+    <Position X="8.75" Y="3.5" Width="2.5" />
+    <Members>
+      <Field Name="abrirToolStripButton" Hidden="true" />
+      <Field Name="abrirToolStripMenuItem" Hidden="true" />
+      <Method Name="abrirToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="archivoToolStripMenuItem" Hidden="true" />
+      <Field Name="ayudaToolStripButton" Hidden="true" />
+      <Field Name="cascadaToolStripMenuItem" Hidden="true" />
+      <Method Name="cascadaToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="colorFondoFormularioToolStripMenuItem" Hidden="true" />
+      <Method Name="colorFondoFormularioToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="colorFondoTextoToolStripMenuItem" Hidden="true" />
+      <Method Name="colorFondoTextoToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="colorTextoToolStripMenuItem" Hidden="true" />
+      <Method Name="colorTextoToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Field Name="copiarToolStripButton" Hidden="true" />
+      <Field Name="copiarToolStripMenuItem" Hidden="true" />
+      <Method Name="copiarToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="cortarToolStripButton" Hidden="true" />
+      <Field Name="cortarToolStripMenuItem" Hidden="true" />
+      <Method Name="cortarToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="deshacerToolStripMenuItem" Hidden="true" />
+      <Method Name="deshacerToolStripMenuItem_Click" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Field Name="editarToolStripMenuItem" Hidden="true" />
+      <Field Name="formatoTextoToolStripMenuItem" Hidden="true" />
+      <Method Name="formatoTextoToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="formatoToolStripMenuItem" Hidden="true" />
+      <Field Name="guardarcomoToolStripMenuItem" Hidden="true" />
+      <Method Name="guardarcomoToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="guardarToolStripButton" Hidden="true" />
+      <Field Name="guardarToolStripMenuItem" Hidden="true" />
+      <Method Name="guardarToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="horizontalToolStripMenuItem" Hidden="true" />
+      <Method Name="horizontalToolStripMenuItem_Click" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="menuStrip1" Hidden="true" />
+      <Field Name="nuevoToolStripButton" Hidden="true" />
+      <Field Name="nuevoToolStripMenuItem" Hidden="true" />
+      <Method Name="nuevoToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="pegarToolStripButton" Hidden="true" />
+      <Field Name="pegarToolStripMenuItem" Hidden="true" />
+      <Method Name="pegarToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="rehacerToolStripMenuItem" Hidden="true" />
+      <Method Name="rehacerToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="salirToolStripMenuItem" Hidden="true" />
+      <Field Name="saveFD" Hidden="true" />
+      <Field Name="seleccionartodoToolStripMenuItem" Hidden="true" />
+      <Method Name="seleccionartodoToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="toolStrip1" Hidden="true" />
+      <Field Name="toolStripSeparator" Hidden="true" />
+      <Field Name="toolStripSeparator1" Hidden="true" />
+      <Field Name="toolStripSeparator3" Hidden="true" />
+      <Field Name="toolStripSeparator4" Hidden="true" />
+      <Field Name="toolStripSeparator6" Hidden="true" />
+      <Field Name="toolStripSeparator7" Hidden="true" />
+      <Field Name="ventanaToolStripMenuItem" Hidden="true" />
+      <Field Name="verticalToolStripMenuItem" Hidden="true" />
+      <Method Name="verticalToolStripMenuItem_Click" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EUNCQOUQUSIAAIhEIkSDJAECAwAkAAAgogWAIgIhIiI=</HashCode>
+      <FileName>Principal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Word.Hijo">
+    <Position X="4" Y="3.5" Width="2.75" />
+    <Members>
+      <Field Name="components" Hidden="true" />
+      <Field Name="contextMenuStrip" Hidden="true" />
+      <Field Name="copiarToolStripMenuItem" Hidden="true" />
+      <Method Name="copiarToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="cortarToolStripMenuItem" Hidden="true" />
+      <Method Name="cortarToolStripMenuItem_Click" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="frmHijo_FormClosing" Hidden="true" />
+      <Method Name="Hijo" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="pegarToolStripMenuItem" Hidden="true" />
+      <Method Name="pegarToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="rtxt" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ASAAAAAAACCABAAAAACBIAACAAAAAAAAIAEAAAAkAgA=</HashCode>
+      <FileName>Hijo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rtxt" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
