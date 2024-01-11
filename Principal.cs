@@ -13,6 +13,7 @@ namespace Word
 {
     public partial class Principal : Form
     {
+        // Borrar
         public Principal()
         {
             InitializeComponent();
