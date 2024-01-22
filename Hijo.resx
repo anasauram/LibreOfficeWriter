@@ -120,4 +120,10 @@
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>166, 17</value>
+  </metadata>
+  <data name="saveFileDialog.Filter" xml:space="preserve">
+    <value>Plain Text (*.txt)|*.txt|Open Document Text (*.odt)|*.odt|Microsoft Word 97/2000/XP (*.doc)|*.doc|Microsoft Word 2007 and later (*.docx)|*.docx|Rich Text Format (*.rtf)|*.rtf|HyperText Markup Language (*.html;*.htm)|*.html;*.htm|Extensible Markup Language (*.xml)|*.xml|WordPerfect Document (*.wpd)|*.wpd|OpenOffice.org Writer 1.0/StarOffice 6.0 (*.sxw)|*.sxw|Unified Office Format text (*.uot)|*.uot|Portable Document Format (*.pdf)|*.pdf</value>
+  </data>
 </root>

@@ -13,7 +13,6 @@ namespace Word
 {
     public partial class Principal : Form
     {
-        // Borrar
         public Principal()
         {
             InitializeComponent();
@@ -27,12 +26,12 @@ namespace Word
             Hijo nuevoHijo = new Hijo();
             nuevoHijo.MdiParent = this;
             nuevoHijo.Show();
+            int num = this.MdiChildren.Length;
         }
 
         private void colorFondoTextoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Paleta de colores para seleccíonar un color.
-            ColorDialog colorDialog = new ColorDialog();
             colorDialog.ShowDialog();
 
             // Pinta fondo del documento del color seleccionado.
@@ -49,41 +48,68 @@ namespace Word
             Hijo hijoActivo = (Hijo)this.ActiveMdiChild;
             if (hijoActivo != null)
             {
-                hijoActivo.guardarComo(saveFD);                
+                hijoActivo.guardarComo();
             }
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Hijo hijoActivo = (Hijo)this.ActiveMdiChild;
-            if (hijoActivo != null)
+
+            if (hijoActivo == null)
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
+                hijoActivo = new Hijo();
+                hijoActivo.MdiParent = this;
+                hijoActivo.Show();
+            }
 
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";  // A la L de | aparece el texto a mostrar y a la derecha el formato a buscar a nivel interno y mostrar
-                if (openFileDialog.ShowDialog() == DialogResult.OK && openFileDialog.FileName != null)
+            if (openFileDialog.ShowDialog() == DialogResult.OK && openFileDialog.FileName != null)
+            {
+                string filePath = openFileDialog.FileName;      // Ruta de archivo seleccionado.
+                Stream fileStream = openFileDialog.OpenFile();
+                StreamReader reader = new StreamReader(fileStream);
+                string fileContent = reader.ReadToEnd();    // Texto de documento.
+
+                RichTextBox rtxt = (RichTextBox)hijoActivo.ActiveControl;
+                if (rtxt.Modified == false)     // Si no ha sido modificado el richtext del formulario hijo existente, le introduzco el contenido del documento abierto.
                 {
-                    string filePath = openFileDialog.FileName;      // Ruta de archivo seleccionado
-                    Stream fileStream = openFileDialog.OpenFile();
-                    StreamReader reader = new StreamReader(fileStream);
-                    string fileContent = reader.ReadToEnd();    // Texto de documento
+                    rtxt.Text = fileContent;
+                    string nombreArchivo = openFileDialog.SafeFileName;
 
-                    RichTextBox rtxt = (RichTextBox)hijoActivo.ActiveControl;
-                    if (rtxt.Modified == false)     // Si no ha sido modificado el richtext del formulario hijo existente, le introduzco el contenido del documento abierto.
+                    // Eliminación de extensión en nombre de archivo
+                    nombreArchivo = nombreArchivo.EndsWith(".doc") || nombreArchivo.EndsWith(".docx") || nombreArchivo.EndsWith(".rtf") ||
+                         nombreArchivo.EndsWith(".txt") || nombreArchivo.EndsWith(".html") || nombreArchivo.EndsWith(".htm") ||
+                         nombreArchivo.EndsWith(".xml") || nombreArchivo.EndsWith(".wpd") || nombreArchivo.EndsWith(".sxw") ||
+                         nombreArchivo.EndsWith(".uot") || nombreArchivo.EndsWith(".pdf") || nombreArchivo.EndsWith(".odt")
+                    ? Path.GetFileNameWithoutExtension(nombreArchivo) : nombreArchivo;
+
+                    try
                     {
-                        rtxt.Text = fileContent;
-                        string nombreArchivo = openFileDialog.SafeFileName;
-                        hijoActivo.Text = nombreArchivo.Substring(0, nombreArchivo.IndexOf("."));
+                        hijoActivo.Text = nombreArchivo;
                         // Actualizamos el listado de documentos de la ventana para que se modifique el nombre.
                         this.ActivateMdiChild(null);
                         this.ActivateMdiChild(hijoActivo);
-                        hijoActivo.filepath = filePath;
+                        hijoActivo.ubicacion = filePath;
                     }
-                    else   // Sino, creo un nuevo formulario para meterle el contenido.
+                    catch (Exception ex)
                     {
-                        Hijo nuevoHijo = new Hijo();
-                        string nombreArchivo2 = openFileDialog.SafeFileName;
+                        MessageBox.Show("Error", "Extensión no reconocida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else   // Sino, creo un nuevo formulario para meterle el contenido.
+                {
+                    Hijo nuevoHijo = new Hijo();
+                    string nombreArchivo2 = openFileDialog.SafeFileName;
+
+                    // Eliminación de extensión en nombre de archivo
+                    nombreArchivo2 = nombreArchivo2.EndsWith(".doc") || nombreArchivo2.EndsWith(".docx") || nombreArchivo2.EndsWith(".rtf") ||
+                        nombreArchivo2.EndsWith(".txt") || nombreArchivo2.EndsWith(".html") || nombreArchivo2.EndsWith(".htm") ||
+                        nombreArchivo2.EndsWith(".xml") || nombreArchivo2.EndsWith(".wpd") || nombreArchivo2.EndsWith(".sxw") ||
+                        nombreArchivo2.EndsWith(".uot") || nombreArchivo2.EndsWith(".pdf") || nombreArchivo2.EndsWith(".odt")
+                        ? Path.GetFileNameWithoutExtension(nombreArchivo2) : nombreArchivo2;
+
+                    try
+                    {
                         nuevoHijo.Text = nombreArchivo2.Substring(0, nombreArchivo2.IndexOf("."));
                         nuevoHijo.MdiParent = this;
                         nuevoHijo.Show();
@@ -91,12 +117,14 @@ namespace Word
                         RichTextBox rtxt2 = (RichTextBox)nuevoHijo.ActiveControl;
                         rtxt2.Text = fileContent;
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error", "Extensión no reconocida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                 }
+                reader.Close();
             }
-
-
-
-            //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
         }
 
         private void cortarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -161,20 +189,23 @@ namespace Word
 
         private void colorFondoFormularioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ColorDialog colorDialog = new ColorDialog();
-            colorDialog.ShowDialog();
-
-            this.BackColor = colorDialog.Color;
-            //Form hijoActivo = this.ActiveMdiChild;
-            //if(hijoActivo != null)
-            //{
-            //    hijoActivo.BackColor = colorDialog.Color;
-            //}
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                // The MDI client area is represented by a control of type MdiClient
+                //foreach (Control control in this.Controls) 
+                //{ 
+                //    if (control is MdiClient) 
+                //    { 
+                //        control.BackColor = Color.Red; 
+                //        break; 
+                //    } 
+                //}
+                Controls.OfType<MdiClient>().FirstOrDefault().BackColor = colorDialog.Color;
+            }
         }
 
         private void colorTextoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ColorDialog colorDialog = new ColorDialog();
             Form hijoActivo = this.ActiveMdiChild;
 
             if (hijoActivo != null && colorDialog.ShowDialog() == DialogResult.OK)
@@ -186,7 +217,13 @@ namespace Word
 
         private void formatoTextoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form hijoActivo = this.ActiveMdiChild;
+            if (hijoActivo != null && fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                RichTextBox rtxt = (RichTextBox)hijoActivo.ActiveControl;
+                rtxt.Font = fontDialog.Font;
 
+            }
         }
 
         private void cascadaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,7 +243,11 @@ namespace Word
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Hijo hijoActivo = (Hijo)this.ActiveMdiChild;
+            if (hijoActivo != null)
+            {
+                hijoActivo.guardar();
+            }
         }
     }
 }
